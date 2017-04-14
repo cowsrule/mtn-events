@@ -1,0 +1,1639 @@
+[
+    {
+        "type": "Element",
+        "tagName": "div",
+        "attributes": {
+            "id": "content-core",
+            "xmlns": "http://www.w3.org/1999/xhtml"
+        },
+        "children": [
+            {
+                "type": "Element",
+                "tagName": "div",
+                "attributes": {
+                    "className": [
+                        "sidebar"
+                    ]
+                },
+                "children": [
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "className": [
+                                "sidebar-box"
+                            ]
+                        },
+                        "children": []
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "id": "register-participant",
+                            "className": [
+                                "sidebar-box"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "header",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "h3",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Register Participant"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "form",
+                                "attributes": {
+                                    "method": "POST",
+                                    "action": "https://www.mountaineers.org/explore/activities/intermediate-alpine-climb-mount-jefferson-jefferson-park-glacier-1/review-registration?ajax_load=1"
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "type": "hidden",
+                                            "name": "c"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "h5",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Prerequisites"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "p",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "One of the following badges:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "ul",
+                                        "attributes": {
+                                            "className": [
+                                                "prereqs"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "li",
+                                                "attributes": {
+                                                    "className": [
+                                                        "prereq",
+                                                        "unchecked"
+                                                    ]
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "a",
+                                                        "attributes": {
+                                                            "href": "https://www.mountaineers.org/membership/badges/course-badges/intermediate-alpine-climbing-course"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Intermediate Alpine Climbing Course"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "li",
+                                                "attributes": {
+                                                    "className": [
+                                                        "prereq",
+                                                        "unchecked"
+                                                    ]
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "a",
+                                                        "attributes": {
+                                                            "href": "https://www.mountaineers.org/membership/badges/course-badges/intermediate-alpine-climbing-course-student"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Intermediate Alpine Climbing Course Student"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "h5",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Leader prerequisites"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "p",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "One of the following badges:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "ul",
+                                        "attributes": {
+                                            "className": [
+                                                "prereqs"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "li",
+                                                "attributes": {
+                                                    "className": [
+                                                        "prereq",
+                                                        "unchecked"
+                                                    ]
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "a",
+                                                        "attributes": {
+                                                            "href": "https://www.mountaineers.org/membership/badges/course-badges/intermediate-alpine-climbing-course"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Intermediate Alpine Climbing Course"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "p",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "a",
+                                                "attributes": {
+                                                    "href": "https://www.mountaineers.org/explore/request-leaders-permission?surveyed-object-uid=6326076986a64222a2fb721bb8d5459f",
+                                                    "target": "_blank"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Request Leader's Permission"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "register-login"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "a",
+                                                "attributes": {
+                                                    "href": "https://www.mountaineers.org/login_form"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Log in to your account"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "register-join"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "a",
+                                                "attributes": {
+                                                    "href": "https://www.mountaineers.org/membership/join-the-mountaineers"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Join The Mountaineers"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "error"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "strong",
+                                                "attributes": {},
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "You must log in to register."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "input",
+                                        "attributes": {
+                                            "type": "submit",
+                                            "value": "Register",
+                                            "id": "register-button",
+                                            "className": [
+                                                "yellow",
+                                                "button",
+                                                "pat-modal"
+                                            ],
+                                            "dataset": {
+                                                "patModal": "{&quot;titleSelector&quot;: &quot;h1.documentFirstHeading&quot;, &quot;loadLinksWithinModal&quot;: false, &quot;prependContent&quot;: null, &quot;automaticallyAddButtonActions&quot;: false, &quot;buttons&quot;: &quot;.asdf&quot;, &quot;actions&quot;: {&quot;.submit&quot;: {}, &quot;.close&quot;: {&quot;displayInModal&quot;: false}, &quot;.redirect&quot;: {&quot;redirectOnResponse&quot;: true, &quot;displayInModal&quot;: false, &quot;reloadWindowOnClose&quot;: false}}}"
+                                            },
+                                            "disabled": "disabled"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "className": [
+                                "sidebar-box"
+                            ]
+                        },
+                        "children": []
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "className": [
+                                "leaders"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "h3",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Text",
+                                        "content": "Contacts"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {
+                                    "className": [
+                                        "roster-contact"
+                                    ]
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "img",
+                                        "attributes": {
+                                            "src": "https://www.mountaineers.org/members/curtis-stock/@@images/a8eb1ead-287f-45c2-8625-f17a47c9a0a9.jpeg",
+                                            "alt": "Curtis Stock",
+                                            "title": "Curtis Stock",
+                                            "height": 64,
+                                            "width": 64
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Curtis Stock"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "roster-position"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Primary Leader"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "em",
+                                        "attributes": {
+                                            "className": [
+                                                "roster-position"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Qualified Youth Leader"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Element",
+                "tagName": "div",
+                "attributes": {
+                    "className": [
+                        "program-core"
+                    ]
+                },
+                "children": [
+                    {
+                        "type": "Element",
+                        "tagName": "ul",
+                        "attributes": {
+                            "className": [
+                                "details"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            Sat, Jul 1, 2017\n            — Tue, Jul 4, 2017\n          "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Committee:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "a",
+                                        "attributes": {
+                                            "href": "https://www.mountaineers.org/about/branches-committees/tacoma-branch/committees/tacoma-climbing-committee/tacoma-climbing-subcommittee-intermediate"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Tacoma Climbing Subcommittee -  Intermediate Climbing"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Activity Type:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            Climbing\n          "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Climbing Category:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": " Intermediate Alpine\n          "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Audience:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            Adults\n          "
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "ul",
+                        "attributes": {
+                            "className": [
+                                "details"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Difficulty:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            Intermediate Mountaineering Climb\n          "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Leader Rating:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            Moderate\n          "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "strong",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Mileage:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "span",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "15.0 mi"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "strong",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Elevation Gain:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "span",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "5,897 ft"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "ul",
+                        "attributes": {
+                            "className": [
+                                "details"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "a",
+                                                "attributes": {
+                                                    "href": "https://www.mountaineers.org/volunteers/leader-resources/financial-policies-procedures-forms/cancellation-policy"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Cancellation &amp; Refund Policy"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "li",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Availability:"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": "\n            \n              3\n            \n            ("
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "span",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "6"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Text",
+                                        "content": " capacity)\n          "
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "className": [
+                                "content-text"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Meeting place and time"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "p",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "TBD"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {},
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "label",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Leader's notes"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {},
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "p",
+                                                "attributes": {},
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Priority for Tacoma Climbing community until 6/22/17."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Element",
+                        "tagName": "div",
+                        "attributes": {
+                            "className": [
+                                "tabs"
+                            ]
+                        },
+                        "children": [
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {
+                                    "className": [
+                                        "tab"
+                                    ]
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-title"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Route/Place"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-content"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "h3",
+                                                "attributes": {},
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Mount Jefferson/Jefferson Park Glacier"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "hr",
+                                                "attributes": {},
+                                                "children": []
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "ul",
+                                                "attributes": {
+                                                    "className": [
+                                                        "details"
+                                                    ]
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "label",
+                                                                "attributes": {},
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Text",
+                                                                        "content": "Recommended Maps:"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "span",
+                                                                "attributes": {},
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "br",
+                                                                        "attributes": {},
+                                                                        "children": []
+                                                                    },
+                                                                    {
+                                                                        "type": "Text",
+                                                                        "content": "USGS Mount Jefferson\n                  "
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "a",
+                                                                "attributes": {
+                                                                    "href": "https://www.mountaineers.org/explore/routes-places/mount-jefferson-jefferson-park-glacier"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Text",
+                                                                        "content": "See full route/place details."
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "div",
+                                                "attributes": {
+                                                    "className": [
+                                                        "googleMapView"
+                                                    ]
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "ul",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "li",
+                                                                "attributes": {},
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "title"
+                                                                            ]
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "img",
+                                                                                "attributes": {
+                                                                                    "src": "https://www.mountaineers.org/marker-red.png",
+                                                                                    "alt": "Red Marker",
+                                                                                    "width": 20,
+                                                                                    "height": 34,
+                                                                                    "className": [
+                                                                                        "marker"
+                                                                                    ]
+                                                                                },
+                                                                                "children": []
+                                                                            },
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "a",
+                                                                                "attributes": {
+                                                                                    "href": "https://www.mountaineers.org/explore/activities/intermediate-alpine-climb-mount-jefferson-jefferson-park-glacier-1"
+                                                                                },
+                                                                                "children": []
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "tab"
+                                                                            ],
+                                                                            "title": "Description"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "div",
+                                                                                "attributes": {},
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "44.706846, -121.874859"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "geo"
+                                                                            ]
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "span",
+                                                                                "attributes": {
+                                                                                    "className": [
+                                                                                        "latitude"
+                                                                                    ]
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "44.7068465"
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "span",
+                                                                                "attributes": {
+                                                                                    "className": [
+                                                                                        "longitude"
+                                                                                    ]
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "-121.874859414"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "li",
+                                                                "attributes": {},
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "title"
+                                                                            ]
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "img",
+                                                                                "attributes": {
+                                                                                    "src": "https://www.mountaineers.org/marker-red.png",
+                                                                                    "alt": "Red Marker",
+                                                                                    "width": 20,
+                                                                                    "height": 34,
+                                                                                    "className": [
+                                                                                        "marker"
+                                                                                    ]
+                                                                                },
+                                                                                "children": []
+                                                                            },
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "a",
+                                                                                "attributes": {
+                                                                                    "href": "https://www.mountaineers.org/explore/activities/intermediate-alpine-climb-mount-jefferson-jefferson-park-glacier-1"
+                                                                                },
+                                                                                "children": []
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "tab"
+                                                                            ],
+                                                                            "title": "Description"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "div",
+                                                                                "attributes": {},
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "44.674271, -121.799535"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "div",
+                                                                        "attributes": {
+                                                                            "className": [
+                                                                                "geo"
+                                                                            ]
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "span",
+                                                                                "attributes": {
+                                                                                    "className": [
+                                                                                        "latitude"
+                                                                                    ]
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "44.6742707"
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "type": "Element",
+                                                                                "tagName": "span",
+                                                                                "attributes": {
+                                                                                    "className": [
+                                                                                        "longitude"
+                                                                                    ]
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "Text",
+                                                                                        "content": "-121.7995351"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "div",
+                                                "attributes": {},
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {
+                                    "className": [
+                                        "tab"
+                                    ],
+                                    "dataset": {
+                                        "tab": "roster"
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-title"
+                                            ],
+                                            "dataset": {
+                                                "tab": "roster"
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Roster"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-content"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "div",
+                                                "attributes": {
+                                                    "style": {
+                                                        "textAlign": "center"
+                                                    }
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "img",
+                                                        "attributes": {
+                                                            "src": "https://www.mountaineers.org/spinner.gif"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {
+                                    "className": [
+                                        "tab"
+                                    ]
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-title"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Required Equipment"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-content"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "h3",
+                                                "attributes": {},
+                                                "children": [
+                                                    {
+                                                        "type": "Text",
+                                                        "content": "Required Equipment"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Element",
+                                                "tagName": "ul",
+                                                "attributes": {},
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Element",
+                                                                "tagName": "strong",
+                                                                "attributes": {},
+                                                                "children": [
+                                                                    {
+                                                                        "type": "Element",
+                                                                        "tagName": "a",
+                                                                        "attributes": {
+                                                                            "title": "",
+                                                                            "href": "https://www.mountaineers.org/learn/how-to/the-ten-essentials",
+                                                                            "className": [
+                                                                                "internal-link"
+                                                                            ],
+                                                                            "target": "_self"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "Text",
+                                                                                "content": "The Ten Essentials"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Mountain boots that can accept crampons (not hiking boots)"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Crampons"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "An ice axe (not technical ice tools)"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "A sleeping bag rated to +20 degrees or colder"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "A sleeping pad"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "A back pack (40 to 60 liters)"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Webbing and accessory cords"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "6 straight gate carabiners"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "2 locking carabiners"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Large pear-shaped locking carabiner"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Belay device"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Climbing harness"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Helmet"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Chock pick (nut tool)"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Rescue pulley"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Fleece or puffy jacket"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Rain jacket and full-zip rain pants"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Belay gloves"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Warm gloves or mittens"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Cordellete"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Picket or other relevant protection"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "li",
+                                                        "attributes": {},
+                                                        "children": [
+                                                            {
+                                                                "type": "Text",
+                                                                "content": "Extra webbing or cord"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Element",
+                                "tagName": "div",
+                                "attributes": {
+                                    "className": [
+                                        "tab"
+                                    ],
+                                    "dataset": {
+                                        "tab": "trip-reports"
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-title"
+                                            ],
+                                            "dataset": {
+                                                "tab": "trip-reports"
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Text",
+                                                "content": "Trip Reports"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Element",
+                                        "tagName": "div",
+                                        "attributes": {
+                                            "className": [
+                                                "tab-content"
+                                            ]
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "Element",
+                                                "tagName": "div",
+                                                "attributes": {
+                                                    "style": {
+                                                        "textAlign": "center"
+                                                    }
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "Element",
+                                                        "tagName": "img",
+                                                        "attributes": {
+                                                            "src": "https://www.mountaineers.org/spinner.gif"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -5,7 +5,7 @@ exports.getRemoteData = function (options, onResult)
 {
     var prot = options.port === 443 ? https : http;
 
-    var req = prot.request(options, function(res)
+    var req = prot.request(options, function (res)
     {
         var output = '';
 
@@ -22,7 +22,7 @@ exports.getRemoteData = function (options, onResult)
         });
     });
 
-    req.on('error', function(err)
+    req.on('error', function (err)
     {
         onResult(404, err.message);
     });
@@ -41,6 +41,50 @@ exports.getRemoteData = function (options, onResult)
     }
 
     req.end();
+};
+
+var validConfigNames = [ 'development', 'production' ];
+
+exports.loadServerConfig = function(configName)
+{
+    var configured = false;
+
+    if (validConfigNames.indexOf(configName) >= 0)
+    {
+        for (var configGroup in config)
+        {
+            var group = config[configGroup];
+
+            if (group[configName])
+            {
+                for (var configVar in group[configName])
+                {
+                    var configValue = group[configName][configVar];
+
+                    if (group[configVar] !== undefined)
+                    {
+                        exports.log('Invalid config value: ', configGroup, configVar);
+
+                        configured = false;
+                    }
+                    else
+                    {
+                        group[configVar] = configValue;
+                    }
+                }
+            }
+        }
+
+        configured = true;
+
+        exports.log('Server configured successfully');
+    }
+    else
+    {
+        exports.log('Invalid config name: ', configName);
+    }
+
+    return configured;
 };
 
 exports.log = function()

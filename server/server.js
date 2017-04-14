@@ -2,6 +2,7 @@ var http = require('http');
 
 var util = require('./util');
 var mtns = require('./mountaineers');
+var db = require('./db');
 
 var Colors = require('colors');
 
@@ -11,6 +12,20 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
 var errorHandler = require('errorhandler');
+
+var schedule = require('node-schedule');
+
+require('./config');
+
+//
+// Routes
+//
+
+var ListEvents = require('./list');
+
+//
+//
+//
 
 Colors.setTheme({
     info: 'grey',
@@ -24,13 +39,14 @@ var args = process.argv.slice(2);
 
 var isProduction = (process.env.NODE_ENV === 'production') || args.indexOf('-prod') >= 0;
 
+util.loadServerConfig(isProduction ? 'production' : 'development');
+
+
 function getServerTypeString()
 {
     return isProduction ? 'production' : app.get('env');
 }
 
-
-var port = process.env.PORT || 9006;
 
 var app = express();
 
@@ -56,9 +72,19 @@ function setup()
 
     createRoutes();
 
-    runServer();
+    db.init(function (success)
+    {
+    	if (success)
+    	{
+	    	runServer();
 
-    startEventsSync();
+	    	startEventsSync();
+	    }
+	    else
+	    {
+	    	util.log('Failed to start server -- db connection error');
+	    }
+    });
 }
 
 function setRoute(type, path, handler)
@@ -68,19 +94,34 @@ function setRoute(type, path, handler)
 
 function startEventsSync()
 {
-	mtns.runEventsSync();
+	var syncJob = schedule.scheduleJob('0 */2 * * *', function ()
+	{
+		util.log('Scheduled Event Sync Running');
+
+  		mtns.runEventsSync();
+	});
+
+	if (args.indexOf('--forceSync') >= 0)
+	{
+		mtns.runEventsSync();
+	}
 }
 
 function createRoutes()
 {
-	
+	app.use('/js', express.static(__dirname + '/../client/js'));
+	app.use('/css', express.static(__dirname + '/../client/css'));
+
+	app.get('/', express.static(__dirname + '/../client', { index: 'index.html' }));
+
+	setRoute('post', '/api/v1/list', ListEvents.route);
 }
 
 function runServer()
 {
-    http.createServer(app).listen(port, function ()
+    http.createServer(app).listen(config.Runtime.port, function ()
     {
-        util.log('[' + '%s'.data + '] HTTP Server running at ' + 'http://localhost:%d'.data, getServerTypeString(), port);
+        util.log('[' + '%s'.data + '] HTTP Server running at ' + 'http://localhost:%d'.data, getServerTypeString(), config.Runtime.port);
     });
 }
 

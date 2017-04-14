@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Mountaineers Events</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/skeleton.css">
+
+	<style>
+		td:nth-child(1) {
+			color: red;
+			padding-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<br />
+
+		<h2>Mountaineers Events</h2>
+
+		<h6>Last Syncd: <b id="syncDate"></b></h6>
+
+		<input type="submit" value="View All" onclick="handleFilterButton('all', this)">
+		<input type="submit" value="View New" onclick="handleFilterButton('new', this)">
+		<input type="submit" value="View Available" onclick="handleFilterButton('avail', this)">
+		<!--<input type="submit" value="Hiking Only" onclick="handleFilterButton('hiking', this)">-->
+		<input type="submit" value="Scramble Only" onclick="handleFilterButton('scramble', this)">
+		<input type="submit" value="Climbing Only" onclick="handleFilterButton('climbing', this)">
+		<input type="submit" value="Basic Only" onclick="handleFilterButton('basic', this)">
+
+		<br />
+		<br />
+
+		<table id="displayTable" class="u-full-width">
+			<thead>
+				<tr>
+					<th></th>
+					<th width="13%" min-width="135px">Start</th>
+					<th width="13%" min-width="135px">End</th>
+					<th>Title</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+
+	<script data-main="/js/main.js" src="/js/require.js"></script>
+</body>
+
+</html>
