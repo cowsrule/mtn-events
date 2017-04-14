@@ -71,6 +71,18 @@ requirejs([ 'util' ], function (util)
 		return entry.id.indexOf('/explore/') === 0;
 	}
 
+	function inFuture(entry)
+	{
+		var currentDate = new Date();
+
+		currentDate.setHours(0);
+		currentDate.setMinutes(0);
+		currentDate.setSeconds(0);
+		currentDate.setMilliseconds(0);
+
+		return currentDate.getTime() < (new Date(entry.startdate)).getTime();
+	}
+
 	function recentlyAdded(entry)
 	{
 		var isRecent = false;
@@ -90,6 +102,11 @@ requirejs([ 'util' ], function (util)
 		}
 
 		return isRecent;
+	}
+
+	function computeNewSymbol(entry)
+	{
+		return recentlyAdded(entry) ? '!' : '';
 	}
 
 	function isRegistrationOpen(entry)
@@ -116,6 +133,14 @@ requirejs([ 'util' ], function (util)
 		return color;
 	}
 
+	function formatDateString(date)
+	{
+		var days = [ 'Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat' ];
+		var months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
+		return days[date.getUTCDay()] + ' ' + months[date.getUTCMonth()] + ' ' + date.getUTCDate();
+	}
+
 	function constructTable(data)
 	{
 		var table = document.getElementById('displayTable');
@@ -129,7 +154,7 @@ requirejs([ 'util' ], function (util)
 		{
 			var entry = data[i];
 
-			if (isActivity(entry))
+			if (isActivity(entry) && inFuture(entry))
 			{
 				var row = document.createElement('tr');
 
@@ -141,12 +166,12 @@ requirejs([ 'util' ], function (util)
 				// var infoLink = '<a href="#" onclick="handleInfoClick(\'' + entry.id + '\')">More</a>';
 
 
-				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : endDate.toDateString().replace(' 2017', '');
+				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : formatDateString(endDate);
 
-				var newSymbol = recentlyAdded(entry) ? '!' : '';
+				var newSymbol = computeNewSymbol(entry);
 
 				addField(row, newSymbol);
-				addField(row, startDate.toDateString().replace(' 2017', ''));
+				addField(row, formatDateString(startDate));
 				addField(row, endStr);
 				addField(row, titleLink);
 				addField(row, computeType(entry));
@@ -183,7 +208,19 @@ requirejs([ 'util' ], function (util)
 
 		var syncDateEle = document.getElementById('syncDate');
 
-		syncDateEle.innerText = (new Date(util.storage.getItem('lastSyncDate'))).toDateString().replace(' 2017', '');
+		var rawDate = util.storage.getItem('lastSyncDate');
+		var displayString;
+
+		if (rawDate)
+		{
+			displayString = formatDateString(new Date(rawDate));
+		}
+		else
+		{
+			displayString = 'NEVER';
+		}
+
+		syncDateEle.innerText = displayString;
 	}
 
 	function addField(row, value)
