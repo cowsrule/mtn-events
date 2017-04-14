@@ -2,7 +2,7 @@
   "name": "MountaineersAPIServer",
   "version": "1.0.0",
   "engines": {
-    "node": "0.10.35",
+    "node": "6.2.1",
     "npm": "1.4.x"
   },
   "dependencies": {
