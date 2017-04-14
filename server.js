@@ -109,10 +109,10 @@ function startEventsSync()
 
 function createRoutes()
 {
-	app.use('/js', express.static(__dirname + '/../client/js'));
-	app.use('/css', express.static(__dirname + '/../client/css'));
+	app.use('/js', express.static(__dirname + '/client/js'));
+	app.use('/css', express.static(__dirname + '/client/css'));
 
-	app.get('/', express.static(__dirname + '/../client', { index: 'index.html' }));
+	app.get('/', express.static(__dirname + '/client', { index: 'index.html' }));
 
 	setRoute('post', '/api/v1/list', ListEvents.route);
 }
