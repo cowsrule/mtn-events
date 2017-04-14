@@ -287,7 +287,7 @@ requirejs([ 'util' ], function (util)
 
     	util.XHR({
 	        type: 'POST',
-	        url: 'http://' + window.location.host + '/api/v1/list',
+	        url: '//' + window.location.host + '/api/v1/list',
 	        data: { lastSyncDate: lastSyncDate },
 	        cb: function (xhr)
 	        {
