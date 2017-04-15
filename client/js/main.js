@@ -240,6 +240,13 @@ requirejs([ 'util' ], function (util)
 	function updateTable()
 	{
 		constructTable(filterChecks(filterEvents(sortEvents(currentEvents.slice(0), currentSortField, currentSortDir), currentFilterFn)));
+
+		updateHash();
+	}
+
+	function updateHash()
+	{
+		window.location.hash = 'slots=' + doFilterSlots + '&register=' + doFilterRegister;
 	}
 
 	function updateLastSync()
@@ -348,87 +355,164 @@ requirejs([ 'util' ], function (util)
 	}
 
 
-    window.handleFilterButton = function (btn, ele)
-    {
-    	switch (btn)
-    	{
-    		case 'all':
-    			currentFilterFn = filterAll;
-    			break;
-    		case 'new':
-    			currentFilterFn = filterNew;
-    			break;
-    		case 'avail':
-    			currentFilterFn = filterAvail;
-    			break;
-    		case 'hiking':
-    			currentFilterFn = filterHiking;
-    			break;
-    		case 'scramble':
-    			currentFilterFn = filterScramble;
-    			break;
-    		case 'climbing':
-    			currentFilterFn = filterClimbing;
-    			break;
-    		case 'basic':
-    			currentFilterFn = filterBasic;
-    			break;
-    		default:
-    			alert('Unknwon Button: ' + btn);
-    			break;
-    	}
+	window.handleFilterButton = function (btn, ele)
+	{
+		switch (btn)
+		{
+			case 'all':
+				currentFilterFn = filterAll;
+				break;
+			case 'new':
+				currentFilterFn = filterNew;
+				break;
+			case 'avail':
+				currentFilterFn = filterAvail;
+				break;
+			case 'hiking':
+				currentFilterFn = filterHiking;
+				break;
+			case 'scramble':
+				currentFilterFn = filterScramble;
+				break;
+			case 'climbing':
+				currentFilterFn = filterClimbing;
+				break;
+			case 'basic':
+				currentFilterFn = filterBasic;
+				break;
+			default:
+				alert('Unknwon Button: ' + btn);
+				break;
+		}
 
-    	updateTable();
-    };
+		updateTable();
+	};
 
-    window.handleCheck = function (chk, ele)
-    {
-    	switch (chk)
-    	{
-    		case 'slots':
-    			doFilterSlots = ele.checked;
-    			break;
-    		case 'register':
-    			doFilterRegister = ele.checked;
-    			break;
-    		default:
-    			alert('Unknown Checkbox: ', chk);
-    			break;
-    	}
+	window.handleCheck = function (chk, ele)
+	{
+		switch (chk)
+		{
+			case 'slots':
+				doFilterSlots = ele.checked;
+				break;
+			case 'register':
+				doFilterRegister = ele.checked;
+				break;
+			default:
+				alert('Unknown Checkbox: ', chk);
+				break;
+		}
 
-    	updateTable();
-    };
+		updateTable();
+	};
 
-    window.handleInfoClick = function (id)
-    {
-    	var event = getEvent(id);
+	window.handleInfoClick = function (id)
+	{
+		var event = getEvent(id);
 
-    	alert(JSON.stringify(event, null, 4));
-    };
+		alert(JSON.stringify(event, null, 4));
+	};
 
-    function runPage()
-    {
-    	var lastSyncDate = util.storage.getItem('lastSyncDate');
-    	util.storage.setItem('currentSyncDate', lastSyncDate);
+	window.handleSubButton = function (id)
+	{
+		var emailEle = document.getElementById('emailaddr');
 
-    	util.XHR({
-	        type: 'POST',
-	        url: '//' + window.location.host + '/api/v1/list',
-	        data: { lastSyncDate: lastSyncDate },
-	        cb: function (xhr)
-	        {
-	        	if (xhr.status === 200)
-	        	{
-	        		var data = JSON.parse(xhr.responseText);
+		var email = emailEle.value;
 
-	        		handleEventData(data.events);
+		util.XHR({
+			type: 'POST',
+			url: '//' + window.location.host + '/api/v1/sub',
+			data: { email: email, list: id },
+			cb: function (xhr)
+			{
+				if (xhr.status === 200)
+				{
+					util.storage.setItem('subscribed', email);
 
-	        		util.storage.setItem('lastSyncDate', data.metadata.lastSyncDate);
-	        	}
-	        }
-	    });
-    }
+					updateSubArea();
+				}
+				else
+				{
+					// Display Error
+				}
+			}
+		});
+	};
+
+	window.handleUnsubButton = function ()
+	{
+		var emailEle = document.getElementById('emailaddr');
+
+		var email = emailEle.value;
+
+		util.XHR({
+			type: 'POST',
+			url: '//' + window.location.host + '/api/v1/unsub',
+			data: { email: email },
+			cb: function (xhr)
+			{
+				if (xhr.status === 200)
+				{
+					util.storage.removeItem('subscribed');
+
+					updateSubArea();
+				}
+				else
+				{
+					// Display Error
+				}
+			}
+		});
+	};
+
+	function updateSubArea()
+	{
+		var subscribed = util.storage.getItem('subscribed');
+
+		if (subscribed)
+		{
+			document.getElementById('emailaddr').value = subscribed;
+
+			document.getElementById('subDaily').style.display = 'none';
+			document.getElementById('subHourly').style.display = 'none';
+		}
+	}
+
+	function runPage()
+	{
+		var lastSyncDate = util.storage.getItem('lastSyncDate');
+		util.storage.setItem('currentSyncDate', lastSyncDate);
+
+		doFilterSlots = util.getURLHashParam('slots') === 'true';
+		doFilterRegister = util.getURLHashParam('register') === 'true';
+
+		document.getElementById('slots').checked = doFilterSlots;
+		document.getElementById('register').checked = doFilterRegister;
+
+		updateSubArea();
+
+		util.XHR({
+			type: 'POST',
+			url: '//' + window.location.host + '/api/v1/list',
+			data: { lastSyncDate: lastSyncDate },
+			cb: function (xhr)
+			{
+				if (xhr.status === 200)
+				{
+					var data = JSON.parse(xhr.responseText);
+
+					handleEventData(data.events);
+
+					util.storage.setItem('lastSyncDate', data.metadata.lastSyncDate);
+				}
+				else
+				{
+					// Display Error
+				}
+			}
+		});
+	}
 
 
-    runPage();
+	runPage();
 });

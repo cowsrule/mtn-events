@@ -2,6 +2,9 @@ var util = require('./util');
 var db = require('./db');
 var parser = require('./parser');
 
+var email = require('./email');
+
+
 var fs = require('fs');
 
 var DOMParser = require('xmldom').DOMParser;
@@ -12,8 +15,26 @@ var himalaya = require('himalaya');
 var RateLimiter = require('limiter').RateLimiter;
 var limiter = new RateLimiter(100, 30 * 1000);
 
-
 var isRunningSync = false;
+
+function createSummaryBody(data)
+{
+	return 'Summary Body!';
+}
+
+
+function notifySyncCompleted(syncData)
+{
+	var summaryBody = createSummaryBody(syncData);
+
+	email.sendHourly(summaryBody, function (success)
+	{
+		if (!success)
+		{
+			email.sendFailureNotification('Hourly Summary Failed to Send!', function () { });
+		}
+	});
+}
 
 exports.runEventsSync = function ()
 {
@@ -36,7 +57,7 @@ exports.runEventsSync = function ()
 
 			isRunningSync = true;
 
-			handleSyncData(authDataString, function (syncResult)
+			handleSyncData(authDataString, function (syncSuccess, syncResultData)
 			{
 				var syncEndTime = Date.now();
 
@@ -45,9 +66,18 @@ exports.runEventsSync = function ()
 				var mins = Math.floor(delta / (60 * 1000));
 				var seconds = Math.floor((delta % (60 * 1000) / 1000));
 
-				util.log('Sync Complete: ' + mins + ' mins ' + seconds + ' secs');
+				util.log('Sync Complete [' + syncSuccess + ']: ' + mins + ' mins ' + seconds + ' secs');
 
 				isRunningSync = false;
+
+				if (syncSuccess)
+				{
+					notifySyncCompleted(syncResultData);
+				}
+				else
+				{
+					email.sendFailureNotification('Hourly Sync Failed!', function () { });
+				}
 			});
 		}
 		else

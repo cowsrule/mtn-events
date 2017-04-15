@@ -44,6 +44,23 @@ self.storage =
     }).bind(self.__storage)
 };
 
+self.getURLHashParam = function (key)
+{
+    var queryString = window.location.hash.substring(1);
+
+    var regex = /([^&=]+)=([^&]*)/g;
+    var m;
+
+    while (m = regex.exec(queryString))
+    {
+        if (decodeURIComponent(m[1]) === key)
+        {
+            return decodeURIComponent(m[2]);
+        }
+    }
+
+    return undefined;
+};
 
 function generateQueryString(data)
 {

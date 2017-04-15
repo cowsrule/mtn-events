@@ -3,6 +3,7 @@ var http = require('http');
 var util = require('./util');
 var mtns = require('./mountaineers');
 var db = require('./db');
+var email = require('./email');
 
 var Colors = require('colors');
 
@@ -22,6 +23,9 @@ require('./config');
 //
 
 var ListEvents = require('./list');
+
+var Subscribe = require('./subscribe');
+var Unsubscribe = require('./unsubscribe');
 
 //
 //
@@ -72,6 +76,8 @@ function setup()
 
     createRoutes();
 
+    email.init();
+
     db.init(function (success)
     {
     	if (success)
@@ -115,6 +121,9 @@ function createRoutes()
 	app.get('/', express.static(__dirname + '/client', { index: 'index.html' }));
 
 	setRoute('post', '/api/v1/list', ListEvents.route);
+
+    setRoute('post', '/api/v1/sub', Subscribe.route);
+    setRoute('post', '/api/v1/unsub', Unsubscribe.route);
 }
 
 function runServer()

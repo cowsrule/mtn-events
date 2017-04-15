@@ -63,11 +63,19 @@
 
 		<h2>Mountaineers Events</h2>
 
-		<!--<h6>Last Syncd: <b id="syncDate"></b></h6>-->
-		<h6>Last Update: <b id="lastUpdate"></b></h6>
+		<div id="subArea">
+			<input type="text" id="emailaddr" placeholder="Email">
 
-		<input type="checkbox" value="slots" onchange="handleCheck('slots', this)"><label for="slots">Slots Available</label>
-		<input type="checkbox" value="register" onchange="handleCheck('register', this)"><label for="register">Registration Open</label>
+			<input id="subDaily" type="submit" value="Subscribe Daily" onclick="handleSubButton('daily')">
+			<input id="subHourly" type="submit" value="Subscribe Hourly" onclick="handleSubButton('hourly')">
+
+			<input type="submit" value="Unsubscribe" onclick="handleUnsubButton()">
+		</div>
+
+		<h6>Last Update: <b id="lastUpdate">Loading...</b></h6>
+
+		<input type="checkbox" value="slots" id="slots" onchange="handleCheck('slots', this)"><label for="slots">Slots Available</label>
+		<input type="checkbox" value="register" id="register" onchange="handleCheck('register', this)"><label for="register">Registration Open</label>
 
 		<br />
 
