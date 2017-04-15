@@ -20,12 +20,39 @@
 			padding-left: 10px;
 		}
 
+		td:nth-child(2) {
+			min-width: 100px;
+			max-width:130px;
+		}
+
+		td:nth-child(3) {
+			min-width: 100px;
+			max-width:130px;
+		}
+
 		td:nth-child(5) {
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			max-width: 250px;
 			overflow: hidden;
+		}
+
+		td:nth-child(6) {
+			min-width: 130px;
 			padding-right: 10px;
+		}
+
+		@media (min-width: 1400px) {
+			.container {
+				width: 90%;
+				max-width: 1200px;
+			}
+		}
+
+		label {
+			display: inline-block;
+			padding-left: 5px;
+			font-weight: auto;
 		}
 	</style>
 </head>
@@ -36,12 +63,17 @@
 
 		<h2>Mountaineers Events</h2>
 
-		<h6>Last Syncd: <b id="syncDate"></b></h6>
+		<!--<h6>Last Syncd: <b id="syncDate"></b></h6>-->
 		<h6>Last Update: <b id="lastUpdate"></b></h6>
+
+		<input type="checkbox" value="slots" onchange="handleCheck('slots', this)"><label for="slots">Slots Available</label>
+		<input type="checkbox" value="register" onchange="handleCheck('register', this)"><label for="register">Registration Open</label>
+
+		<br />
 
 		<input type="submit" value="View All" onclick="handleFilterButton('all', this)">
 		<input type="submit" value="View New" onclick="handleFilterButton('new', this)">
-		<input type="submit" value="View Available" onclick="handleFilterButton('avail', this)">
+		<!--<input type="submit" value="View Available" onclick="handleFilterButton('avail', this)">-->
 		<!--<input type="submit" value="Hiking Only" onclick="handleFilterButton('hiking', this)">-->
 		<input type="submit" value="Scramble Only" onclick="handleFilterButton('scramble', this)">
 		<input type="submit" value="Climbing Only" onclick="handleFilterButton('climbing', this)">
@@ -54,14 +86,15 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th style="max-width:150px; min-width:120px;">Start</th>
-					<th style="max-width:150px; min-width:120px;">End</th>
+					<th>Start</th>
+					<th>End</th>
 					<th>Title</th>
-					<th style="max-width:200px;">Type</th>
+					<th>Type</th>
+					<th>Opens</th>
 				</tr>
 			</thead>
 			<tbody>
-				
+
 			</tbody>
 		</table>
 	</div>

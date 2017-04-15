@@ -5,6 +5,9 @@ requirejs([ 'util' ], function (util)
 	var lastUpdate;
 	var currentEvents;
 
+	var doFilterSlots = false;
+	var doFilterRegister = false;
+
 	var currentSortField = 'startdate';
 	var currentSortDir = 'asc';
 	var currentFilterFn = filterAll;
@@ -51,6 +54,23 @@ requirejs([ 'util' ], function (util)
 	function filterEvents(events, fn)
 	{
 		return events.filter(fn);
+	}
+
+	function filterChecks(data)
+	{
+		var outData = data;
+
+		if (doFilterSlots)
+		{
+			outData = filterEvents(outData, hasSlotsAvailable);
+		}
+
+		if (doFilterRegister)
+		{
+			outData = filterEvents(outData, isRegistrationOpen);
+		}
+
+		return outData;
 	}
 
 	function computeType(entry)
@@ -112,14 +132,26 @@ requirejs([ 'util' ], function (util)
 
 	function isRegistrationOpen(entry)
 	{
-		return true;
+		var isOpen = false;
+
+		if (!entry.regdate)
+		{
+			isOpen = true;
+		}
+
+		return isOpen;
+	}
+
+	function hasSlotsAvailable(entry)
+	{
+		return entry.availslots > 0;
 	}
 
 	function computeBGColor(entry)
 	{
 		var color = 'white';
 
-		if (entry.availslots > 0)
+		if (hasSlotsAvailable(entry))
 		{
 			if (isRegistrationOpen(entry))
 			{
@@ -166,13 +198,16 @@ requirejs([ 'util' ], function (util)
 
 				var startDate = new Date(entry.startdate);
 				var endDate = new Date(entry.enddate);
+				var regDate = new Date(entry.regdate);
 				var title = entry.title.split('-')[1].trim();
 
 				var titleLink = '<a href="' + entry.href + '" target="_blank">' + title + '</a>';
-				// var infoLink = '<a href="#" onclick="handleInfoClick(\'' + entry.id + '\')">More</a>';
+				var infoLink = '<a href="#" onclick="handleInfoClick(\'' + entry.id + '\')">More</a>';
 
 
 				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : formatDateString(endDate);
+
+				var regStr = isRegistrationOpen(entry) ? '-' : (formatDateString(regDate) + ' ' + formatTimeString(regDate));
 
 				var newSymbol = computeNewSymbol(entry);
 
@@ -181,6 +216,7 @@ requirejs([ 'util' ], function (util)
 				addField(row, endStr);
 				addField(row, titleLink);
 				addField(row, computeType(entry));
+				addField(row, regStr);
 				// addField(row, infoLink);
 
 				row.style.backgroundColor = computeBGColor(entry);
@@ -203,7 +239,7 @@ requirejs([ 'util' ], function (util)
 
 	function updateTable()
 	{
-		constructTable(filterEvents(sortEvents(currentEvents.slice(0), currentSortField, currentSortDir), currentFilterFn));
+		constructTable(filterChecks(filterEvents(sortEvents(currentEvents.slice(0), currentSortField, currentSortDir), currentFilterFn)));
 	}
 
 	function updateLastSync()
@@ -230,6 +266,7 @@ requirejs([ 'util' ], function (util)
 		var lastUpdateEle = document.getElementById('lastUpdate');
 
 		var lastUpdate = new Date(0);
+		var deltaMS = lastUpdate.getTimezoneOffset() * 60 * 1000;
 
 		for (var i = 0; i < currentEvents.length; ++i)
 		{
@@ -241,7 +278,9 @@ requirejs([ 'util' ], function (util)
 			}
 		}
 
-		lastUpdateEle.innerText = formatDateString(lastUpdate) + ' ' + formatTimeString(lastUpdate);
+		var outDate = new Date(lastUpdate.getTime() - deltaMS);
+
+		lastUpdateEle.innerText = formatDateString(outDate) + ' ' + formatTimeString(outDate);
 	}
 
 	function handleEventData(data)
@@ -250,7 +289,7 @@ requirejs([ 'util' ], function (util)
 
 		updateTable();
 
-		updateLastSync();
+		// updateLastSync();
 
 		updateLastUpdate();
 	}
@@ -305,7 +344,7 @@ requirejs([ 'util' ], function (util)
 
 	function filterBasic(e)
 	{
-		return e.type.indexOf('Climbing') >= 0 && e.title.indexOf('Basic') === 0 || e.title.indexOf('Glacier') === 0;
+		return e.type.indexOf('Climbing') >= 0 && (e.title.indexOf('Basic') === 0 || e.title.indexOf('Glacier') === 0);
 	}
 
 
@@ -336,6 +375,24 @@ requirejs([ 'util' ], function (util)
     			break;
     		default:
     			alert('Unknwon Button: ' + btn);
+    			break;
+    	}
+
+    	updateTable();
+    };
+
+    window.handleCheck = function (chk, ele)
+    {
+    	switch (chk)
+    	{
+    		case 'slots':
+    			doFilterSlots = ele.checked;
+    			break;
+    		case 'register':
+    			doFilterRegister = ele.checked;
+    			break;
+    		default:
+    			alert('Unknown Checkbox: ', chk);
     			break;
     	}
 
