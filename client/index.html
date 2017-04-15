@@ -23,6 +23,9 @@
 		td:nth-child(5) {
 			white-space: nowrap;
 			text-overflow: ellipsis;
+			max-width: 250px;
+			overflow: hidden;
+			padding-right: 10px;
 		}
 	</style>
 </head>
@@ -34,6 +37,7 @@
 		<h2>Mountaineers Events</h2>
 
 		<h6>Last Syncd: <b id="syncDate"></b></h6>
+		<h6>Last Update: <b id="lastUpdate"></b></h6>
 
 		<input type="submit" value="View All" onclick="handleFilterButton('all', this)">
 		<input type="submit" value="View New" onclick="handleFilterButton('new', this)">
@@ -50,10 +54,10 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th width="13%" min-width="135px">Start</th>
-					<th width="13%" min-width="135px">End</th>
+					<th style="max-width:150px; min-width:120px;">Start</th>
+					<th style="max-width:150px; min-width:120px;">End</th>
 					<th>Title</th>
-					<th>Type</th>
+					<th style="max-width:200px;">Type</th>
 				</tr>
 			</thead>
 			<tbody>

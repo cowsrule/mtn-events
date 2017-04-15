@@ -2,6 +2,7 @@ if (typeof DEBUG === 'undefined') { DEBUG = true; }
 
 requirejs([ 'util' ], function (util)
 {
+	var lastUpdate;
 	var currentEvents;
 
 	var currentSortField = 'startdate';
@@ -141,6 +142,11 @@ requirejs([ 'util' ], function (util)
 		return days[date.getUTCDay()] + ' ' + months[date.getUTCMonth()] + ' ' + date.getUTCDate();
 	}
 
+	function formatTimeString(date)
+	{
+		return date.toTimeString().substr(0, 5);
+	}
+
 	function constructTable(data)
 	{
 		var table = document.getElementById('displayTable');
@@ -200,12 +206,8 @@ requirejs([ 'util' ], function (util)
 		constructTable(filterEvents(sortEvents(currentEvents.slice(0), currentSortField, currentSortDir), currentFilterFn));
 	}
 
-	function handleEventData(data)
+	function updateLastSync()
 	{
-		currentEvents = data;
-
-		updateTable();
-
 		var syncDateEle = document.getElementById('syncDate');
 
 		var rawDate = util.storage.getItem('lastSyncDate');
@@ -221,6 +223,36 @@ requirejs([ 'util' ], function (util)
 		}
 
 		syncDateEle.innerText = displayString;
+	}
+
+	function updateLastUpdate()
+	{
+		var lastUpdateEle = document.getElementById('lastUpdate');
+
+		var lastUpdate = new Date(0);
+
+		for (var i = 0; i < currentEvents.length; ++i)
+		{
+			var up = new Date(currentEvents[i].updatedate);
+
+			if (up.getTime() > lastUpdate.getTime())
+			{
+				lastUpdate = up;
+			}
+		}
+
+		lastUpdateEle.innerText = formatDateString(lastUpdate) + ' ' + formatTimeString(lastUpdate);
+	}
+
+	function handleEventData(data)
+	{
+		currentEvents = data;
+
+		updateTable();
+
+		updateLastSync();
+
+		updateLastUpdate();
 	}
 
 	function addField(row, value)
