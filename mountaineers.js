@@ -195,7 +195,7 @@ function parseExtendedInfo(html)
 		var rating;
 		var elevation;
 		var miles;
-		
+
 		for (var i = 0; i < stats.children.length; ++i)
 		{
 			var field = stats.children[i];
@@ -260,9 +260,14 @@ function parseExtendedInfo(html)
 			}
 		}
 
-		var regString = reg.children[0];// .children[0].children[0].content;
+		var regString;
 
-		// util.log('Reg: ', regString);
+		if (reg.children[0].type !== 'Text')
+		{
+			regString = reg.children[0].children[0].children[0].children[0].content;
+
+			// util.log('Reg: ', JSON.stringify(regObj, null, 4));
+		}
 
 
 		// More
@@ -274,6 +279,8 @@ function parseExtendedInfo(html)
 		var dateInfo = parser.parseDate(dateStr);
 		var regInfo = parser.parseRegistration(regString);
 
+		var diffInfo = parser.parseDifficulty(difficulty);
+
 		info =
 		{
 			startDate: dateInfo.start,
@@ -282,7 +289,9 @@ function parseExtendedInfo(html)
 			closeDate: regInfo.close,
 			type: parser.parseString(type),
 			category: parser.parseString(category),
-			difficulty: parser.parseDifficulty(difficulty),
+			diff: diffInfo.type,
+			technical: diffInfo.technical,
+			strenuous: diffInfo.strenuous,
 			rating: parser.parseString(rating),
 			miles: miles,
 			elevation: elevation,
@@ -368,47 +377,70 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 	{
 		var didChange = false;
 
-		function markChanged(field)
+		function compareValues(oldValue, newValue)
 		{
-			util.log('Field Changed: ', field, extendedInfo[field]);
+			var areEqual = false;
+
+			if (oldValue === undefined || oldValue === null && newValue === undefined || newValue === null)
+			{
+				areEqual = true;
+			}
+			else if (oldValue === newValue)
+			{
+				areEqual = true;
+			}
+			else if (oldValue && newValue)
+			{
+				if (oldValue instanceof Date && newValue instanceof Date && oldValue.getTime() === newValue.getTime())
+				{
+					areEqual = true;
+				}
+			}
+
+			return areEqual;
+		}
+
+		function markChanged(field, oldValue, newValue)
+		{
+			util.log('Field Changed: ', field, oldValue, '->', newValue, typeof oldValue, typeof newValue, oldValue instanceof Date, newValue instanceof Date);
 
 			didChange = true;
 		}
 
-		for (var i = 0; i < dbEvents.length; ++i)
+		var dbEvent = dbEvents[basicInfo.id];
+
+		if (dbEvent)
 		{
-			var dbEvent = dbEvents[i];
-
-			if (dbEvent.id === basicInfo.id)
+			for (var field in extendedInfo)
 			{
-				for (var field in extendedInfo)
+				var value = extendedInfo[field];
+
+				var dbField = field.toLowerCase();
+
+				switch (field)
 				{
-					var value = extendedInfo[field];
-
-					switch (field)
-					{
-						case 'availSlots':
-						case 'leaderSlots':
-							if (value.avail !== dbEvent[field]) { markChanged(field); }
-							break;
-						case 'type':
-						case 'regDate':
-						case 'closeDate':
-						case 'category':
-						case 'difficulty':
-						case 'rating':
-						case 'miles':
-						case 'elevation':
-						case 'endDate':
-						case 'startDate':
-							if (value !== dbEvent[field]) { markChanged(field); }
-							break;
-						default:
-							break;
-					}
+					case 'availSlots':
+					case 'leaderSlots':
+						if (!compareValues(value.avail, dbEvent[dbField])) { markChanged(field, dbEvent[dbField], value.avail); }
+						break;
+					case 'type':
+					case 'regDate':
+					case 'closeDate':
+					case 'category':
+					case 'diff':
+					case 'technical':
+					case 'strenuous':
+					case 'rating':
+					case 'miles':
+					case 'elevation':
+					case 'endDate':
+					case 'startDate':
+						if (!compareValues(value, dbEvent[dbField])) { markChanged(field, dbEvent[dbField], value); }
+						break;
+					default:
+						util.log('Unknown Field: ' + field);
+						break;
 				}
-
-				break;
 			}
 		}
 

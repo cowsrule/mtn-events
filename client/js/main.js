@@ -139,7 +139,7 @@ requirejs([ 'util' ], function (util)
 		var days = [ 'Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat' ];
 		var months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
-		return days[date.getUTCDay()] + ' ' + months[date.getUTCMonth()] + ' ' + date.getUTCDate();
+		return days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate();
 	}
 
 	function formatTimeString(date)

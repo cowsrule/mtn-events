@@ -34,10 +34,10 @@ exports.init = function (cb)
 		'description text,' +
 		'lat text,' +
 		'long text,' +
-		'regDate date,' +
-		'closeDate date,' +
-		'updateDate date,' +
-		'foundDate date,' +
+		'regDate timestamp,' +
+		'closeDate timestamp,' +
+		'updateDate timestamp,' +
+		'foundDate timestamp,' +
 		'startDate date,' +
 		'endDate date,' +
 		'category text,' +
