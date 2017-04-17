@@ -481,11 +481,17 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 	var handledEvents = 0;
 	var doneIterating = false;
 
+	var changeSummary =
+	{
+		newEvents:  [ ],
+		updatedEvents: [ ]
+	};
+
 	function checkIsComplete()
 	{
 		if (doneIterating && handledEvents === expectedEvents)
 		{
-			return cb();
+			return cb(/*success*/true, changeSummary);
 		}
 	}
 
@@ -499,6 +505,8 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 			{
 				if (isNewEvent(basicInfo))
 				{
+					changeSummary.newEvents.push({ basic: basicInfo, extended: extendedInfo });
+
 					db.insertEvent(basicInfo, extendedInfo, function (insertResult)
 					{
 						if (insertResult)
@@ -515,6 +523,8 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 				}
 				else if (didEventChange(basicInfo, extendedInfo))
 				{
+					changeSummary.updatedEvents.push({ basic: basicInfo, extended: extendedInfo });
+
 					db.updateEvent(basicInfo, extendedInfo, function (updateResult)
 					{
 						if (updateResult)

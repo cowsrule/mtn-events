@@ -17,6 +17,8 @@ exports.init = function ()
 
     dailyList = mailgun.lists(dailyListName);
     hourlyList = mailgun.lists(hourlyListName);
+
+    util.log('Admin Email: ', config.Runtime.adminEmail);
 };
 
 exports.subscribeDaily = function (email, name, cb)
@@ -72,19 +74,21 @@ exports.sendDaily = function (text, cb)
 {
     var data =
     {
-        from:'Grant Watters <grant@mail.gwatters.com>',
+        from: 'Grant Watters <grant@mail.gwatters.com>',
         to: dailyListName,
         subject: 'Daily Events Summary',
         text: text
     };
 
+    util.log('Send Daily: ', data);
+
     mailgun.messages().send(data, function (err, body)
     {
-        if (err) { util.log('Daily Send Error: ', err); }
+        if (err) { util.log('Daily Send Error: ', dailyListName, err); }
 
         util.log('Daily email sent: ', body);
 
-        return cb(!!err);
+        return cb(!err);
     });
 };
 
@@ -98,13 +102,15 @@ exports.sendHourly = function (text, cb)
         text: text
     };
 
+    util.log('Send Hourly: ', data);
+
     mailgun.messages().send(data, function (err, body)
     {
-        if (err) { util.log('Hourly Send Error: ', err); }
+        if (err) { util.log('Hourly Send Error: ', hourlyListName, err); }
 
         util.log('Hourly email sent: ', body);
 
-        return cb(!!err);
+        return cb(!err);
     });
 };
 
@@ -118,12 +124,14 @@ exports.sendFailureNotification = function (text, cb)
         text: text
     };
 
+    util.log('Send Failure: ', data);
+
     mailgun.messages().send(data, function (err, body)
     {
-        if (err) { util.log('Failure Send Error: ', err); }
+        if (err) { util.log('Failure Send Error: ', config.Runtime.adminEmail, err); }
 
         util.log('Failure Notification Sent: ', body);
 
-        return cb(!!err);
+        return cb(!err);
     });
 };

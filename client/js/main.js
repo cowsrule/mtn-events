@@ -117,7 +117,7 @@ requirejs([ 'util' ], function (util)
 			currentSyncDate = new Date(currentSyncDate);
 		}
 
-		if (foundDate.getTime() - Date.now() < 8.64e+7 || (currentSyncDate && currentSyncDate.getTime() > foundDate.getTime()))
+		if (Date.now() - foundDate.getTime() < 8.64e+7)
 		{
 			isRecent = true;
 		}
@@ -127,7 +127,18 @@ requirejs([ 'util' ], function (util)
 
 	function computeNewSymbol(entry)
 	{
-		return recentlyAdded(entry) ? '!' : '';
+		var symbol;
+
+		if (recentlyAdded(entry))
+		{
+			symbol = '<span title="Added on ' + formatDateString(new Date(entry.founddate)) + '">!</span>';
+		}
+		else
+		{
+			symbol = '';
+		}
+
+		return symbol
 	}
 
 	function isRegistrationOpen(entry)
@@ -326,7 +337,7 @@ requirejs([ 'util' ], function (util)
 			currentSyncDate = new Date(currentSyncDate);
 		}
 
-		return !currentSyncDate || (currentSyncDate.getTime() > foundDate.getTime()) || (currentSyncDate.getTime() - Date.now() < 8.64e+7);
+		return (Date.now() - foundDate.getTime() < 8.64e+7);
 	}
 
 	function filterAvail(e)
