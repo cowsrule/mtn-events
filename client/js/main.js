@@ -177,12 +177,17 @@ requirejs([ 'util' ], function (util)
 		return color;
 	}
 
-	function formatDateString(date)
-	{
-		var days = [ 'Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat' ];
+	var days = [ 'Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat' ];
 		var months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
+	function formatDateString(date)
+	{
 		return days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate();
+	}
+
+	function formatUTCDateString(date)
+	{
+		return days[date.getUTCDay()] + ' ' + months[date.getUTCMonth()] + ' ' + date.getUTCDate();
 	}
 
 	function formatTimeString(date)
@@ -216,14 +221,14 @@ requirejs([ 'util' ], function (util)
 				var infoLink = '<a href="#" onclick="handleInfoClick(\'' + entry.id + '\')">More</a>';
 
 
-				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : formatDateString(endDate);
+				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : formatUTCDateString(endDate);
 
 				var regStr = isRegistrationOpen(entry) ? '-' : (formatDateString(regDate) + ' ' + formatTimeString(regDate));
 
 				var newSymbol = computeNewSymbol(entry);
 
 				addField(row, newSymbol);
-				addField(row, formatDateString(startDate));
+				addField(row, formatUTCDateString(startDate));
 				addField(row, endStr);
 				addField(row, titleLink);
 				addField(row, computeType(entry));
