@@ -217,6 +217,8 @@ requirejs([ 'util' ], function (util)
 				var regDate = new Date(entry.regdate);
 				var title = entry.title.split('-')[1].trim();
 
+				var slots = entry.availslots < 0 ? Math.abs(entry.availslots) : '-';
+
 				var titleLink = '<a href="' + entry.href + '" target="_blank">' + title + '</a>';
 				var infoLink = '<a href="#" onclick="handleInfoClick(\'' + entry.id + '\')">More</a>';
 
@@ -233,6 +235,7 @@ requirejs([ 'util' ], function (util)
 				addField(row, titleLink);
 				addField(row, computeType(entry));
 				addField(row, regStr);
+				addField(row, slots);
 				// addField(row, infoLink);
 
 				row.style.backgroundColor = computeBGColor(entry);
@@ -240,6 +243,8 @@ requirejs([ 'util' ], function (util)
 				tbody.appendChild(row);
 			}
 		}
+
+		updateAggregateData(data);
 	}
 
 	function getEvent(id)
@@ -304,6 +309,51 @@ requirejs([ 'util' ], function (util)
 		var outDate = new Date(lastUpdate.getTime() - deltaMS);
 
 		lastUpdateEle.innerText = formatDateString(outDate) + ' ' + formatTimeString(outDate);
+	}
+
+	function updateAggregateData(data)
+	{
+		var destinations = { };
+
+		var sel = document.getElementById('destinationDropdown');
+
+		if (sel)
+		{
+			for (var i = 0; i < data.length; ++i)
+			{
+				var ev = data[i];
+
+				if (isActivity(ev) && inFuture(ev))
+				{
+					var dest = ev.title.split('-')[1].trim();
+
+					if (destinations.hasOwnProperty(dest))
+					{
+						destinations[dest]++;
+					}
+					else
+					{
+						destinations[dest] = 1;
+					}
+				}
+			}
+
+			sel.innerHTML = '';
+
+			for (var dest in destinations)
+			{
+				var opt = document.createElement('option');
+
+				opt.innerText = dest + ' (' + destinations[dest] + ')';
+
+				sel.appendChild(opt);
+			}
+		}
+	}
+
+	function handleDestinationChange()
+	{
+
 	}
 
 	function handleEventData(data)
@@ -373,13 +423,18 @@ requirejs([ 'util' ], function (util)
 
 	window.handleFilterButton = function (btn, ele)
 	{
+		currentSortField = 'startdate';
+		currentSortDir = 'asc';
+
 		switch (btn)
 		{
 			case 'all':
 				currentFilterFn = filterAll;
 				break;
 			case 'new':
-				currentFilterFn = filterNew;
+				currentFilterFn = filterAll;
+				currentSortField = 'founddate';
+				currentSortDir = 'desc';
 				break;
 			case 'avail':
 				currentFilterFn = filterAvail;

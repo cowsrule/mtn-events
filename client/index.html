@@ -39,6 +39,10 @@
 
 		td:nth-child(6) {
 			min-width: 130px;
+		}
+
+		td:nth-child(7) {
+			max-width: 30px;
 			padding-right: 10px;
 		}
 
@@ -79,6 +83,10 @@
 
 		<br />
 
+		<!-- <select id="destinationDropdown" onchange="handleDestinationChange()"></select> -->
+
+		<br />
+
 		<input type="submit" value="View All" onclick="handleFilterButton('all', this)">
 		<input type="submit" value="View New" onclick="handleFilterButton('new', this)">
 		<!--<input type="submit" value="View Available" onclick="handleFilterButton('avail', this)">-->
@@ -99,6 +107,7 @@
 					<th>Title</th>
 					<th>Type</th>
 					<th>Opens</th>
+					<th>Waitlist</th>
 				</tr>
 			</thead>
 			<tbody>
