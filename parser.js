@@ -188,14 +188,16 @@ exports.parseAvail = function (nodes)
 {
 	var str = nodes ? visitNode({ type: 'Element', children: nodes }) : '';
 
-	var regex = /(\d+|FULL)\s+\((\d+).*\)/g;
+	var regex = /(\d+|FULL)(?:(?:,\s+(\d)+\s+on\s+waitlist\s+)|\s+)\((\d+).*\)/g;
 
 	var res = regex.exec(str);
 
 	if (res)
 	{
-		var avail = res[1] === 'FULL' ? 0 : res[1];
-		var total = res[2];
+		var avail = res[1] === 'FULL' ? (res[2] ? -res[2] : 0) : res[1];
+		var total = res[3];
+
+		util.log('Slots: ', avail, total);
 
 		return { avail: parseInt(avail), total: parseInt(total) };
 	}
