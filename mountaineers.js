@@ -19,7 +19,7 @@ var isRunningSync = false;
 
 function createSummaryBody(data)
 {
-	return 'Summary Body!';
+	return 'Hourly Summary: <br /><pre>' + JSON.stringify(data, null, 4) + '</pre>';
 }
 
 
