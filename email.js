@@ -70,13 +70,14 @@ exports.unsubscribe = function (email, cb)
     });
 };
 
-exports.sendDaily = function (text, cb)
+exports.sendDaily = function (html, text, cb)
 {
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',
         to: dailyListName,
         subject: 'Daily Events Summary',
+        html: html,
         text: text
     };
 
@@ -92,13 +93,14 @@ exports.sendDaily = function (text, cb)
     });
 };
 
-exports.sendHourly = function (text, cb)
+exports.sendHourly = function (html, text, cb)
 {
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',
         to: hourlyListName,
         subject: 'Hourly Events Summary',
+        html: html,
         text: text
     };
 
@@ -114,14 +116,14 @@ exports.sendHourly = function (text, cb)
     });
 };
 
-exports.sendFailureNotification = function (text, cb)
+exports.sendFailureNotification = function (html, cb)
 {
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',
         to: config.Runtime.adminEmail,
         subject: 'Failure Notification',
-        text: text
+        html: html
     };
 
     util.log('Send Failure: ', data);

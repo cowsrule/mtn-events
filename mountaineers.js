@@ -17,23 +17,64 @@ var limiter = new RateLimiter(100, 30 * 1000);
 
 var isRunningSync = false;
 
+var days = [ 'Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat' ];
+var months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
+function formatDateString(date)
+{
+	return days[date.getDay()] + ' ' + months[date.getMonth()] + ' ' + date.getDate();
+}
+
+function generateEventHTML(ev)
+{
+	var title = ev.title.split('-')[1].trim();
+
+	return formatDateString(new Date(ev.startdate)) + ': <a href="' + ev.href + '" target="_blank">' + title + '</a>';
+}
+
+function generateEventText(ev)
+{
+	return JSON.stringify(ev, null, 4);
+}
+
 function createSummaryBody(data)
 {
-	return 'Hourly Summary: <br /><pre>' + JSON.stringify(data, null, 4) + '</pre>';
+	if (data.newEvents.length > 0)
+	{
+		var bodyHTML = 'Hourly Summary: <br />';
+		var bodyText = 'Hourly Summary: \n';
+
+		for (var i = 0; i < data.newEvents; ++i)
+		{
+			bodyHTML += generateEventHTML(data.newEvents[i]);
+			bodyText += generateEventText(data.newEvents[i]);
+		}
+
+		return { html: bodyHTML, text: bodyText };
+	}
+
+	return undefined;
 }
 
 
 function notifySyncCompleted(syncData)
 {
-	var summaryBody = createSummaryBody(syncData);
+	var body= createSummaryBody(syncData);
 
-	email.sendHourly(summaryBody, function (success)
+	if (body)
 	{
-		if (!success)
+		email.sendHourly(body.html, body.text, function (success)
 		{
-			email.sendFailureNotification('Hourly Summary Failed to Send!', function () { });
-		}
-	});
+			if (!success)
+			{
+				email.sendFailureNotification('Hourly Summary Failed to Send!', function () { });
+			}
+		});
+	}
+	else
+	{
+		util.log('No new events - skipped hourly summary email');
+	}
 }
 
 exports.runEventsSync = function ()
