@@ -27,9 +27,14 @@ function formatDateString(date)
 
 function generateEventHTML(ev)
 {
-	var title = ev.title.split('-')[1].trim();
+	// Basic1
+	var title = ev.basicInfo.title.split('-')[1].trim();
+	var href = ev.basicInfo.href
 
-	return formatDateString(new Date(ev.startdate)) + ': <a href="' + ev.href + '" target="_blank">' + title + '</a><br />';
+	// Extended
+	var startDate = formatDateString(new Date(ev.extendedInfo.startDate));
+
+	return startDate + ': <a href="' + href + '" target="_blank">' + title + '</a><br />';
 }
 
 function generateEventText(ev)
@@ -41,16 +46,25 @@ function createSummaryBody(data)
 {
 	if (data.newEvents.length > 0)
 	{
-		var bodyHTML = 'Hourly Summary:<br />';
-		var bodyText = 'Hourly Summary:\r\n';
-
-		for (var i = 0; i < data.newEvents.length; ++i)
+		try
 		{
-			bodyHTML += generateEventHTML(data.newEvents[i]);
-			bodyText += generateEventText(data.newEvents[i]);
-		}
+			var bodyHTML = 'Hourly Summary:<br />';
+			var bodyText = 'Hourly Summary:\r\n';
 
-		return { html: bodyHTML, text: bodyText };
+			for (var i = 0; i < data.newEvents.length; ++i)
+			{
+				bodyHTML += generateEventHTML(data.newEvents[i]);
+				bodyText += generateEventText(data.newEvents[i]);
+			}
+
+			return { html: bodyHTML, text: bodyText };
+		}
+		catch (err)
+		{
+			util.log('Error creating event summary: ', err);
+
+			return undefined;
+		}
 	}
 
 	return undefined;
@@ -59,7 +73,7 @@ function createSummaryBody(data)
 
 function notifySyncCompleted(syncData)
 {
-	var body= createSummaryBody(syncData);
+	var body = createSummaryBody(syncData);
 
 	if (body)
 	{
