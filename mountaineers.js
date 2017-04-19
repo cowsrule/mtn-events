@@ -128,6 +128,34 @@ exports.runEventsSync = function ()
 	});
 };
 
+exports.syncSingleEvent = function (id)
+{
+	var reqHeaders =
+	{
+		'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+	};
+
+	util.getRemoteData({
+		host: 'www.mountaineers.org',
+        port: 443,
+        path: id,
+        method: 'GET',
+        headers: reqHeaders
+	}, function (eventStatusCode, eventDataString, fullResult)
+	{
+		if (eventStatusCode === 200)
+		{
+			var extendedInfo = parseExtendedInfo(eventDataString);
+
+			util.log('Parsed: ', extendedInfo);
+		}
+		else
+		{
+			util.log('Error fetching extended info: ', eventStatusCode, eventDataString);
+		}
+	});
+};
+
 function convertToJSON(html)
 {
 	html = html.replace(/<!--[\s\S]*?-->/g, '');

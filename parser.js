@@ -197,8 +197,6 @@ exports.parseAvail = function (nodes)
 		var avail = res[1] === 'FULL' ? (res[2] ? -res[2] : 0) : res[1];
 		var total = res[3];
 
-		util.log('Slots: ', avail, total);
-
 		return { avail: parseInt(avail), total: parseInt(total) };
 	}
 

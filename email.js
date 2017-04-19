@@ -8,21 +8,34 @@ var hourlyListName;
 var dailyList;
 var hourlyList;
 
+var isEnabled = false;
+
 exports.init = function ()
 {
-    mailgun = require('mailgun-js')({ apiKey: config.Mailgun.key, domain: config.Mailgun.domain });
+    if (config.Mailgun.key)
+    {
+        mailgun = require('mailgun-js')({ apiKey: config.Mailgun.key, domain: config.Mailgun.domain });
 
-    dailyListName = 'mtndailyevents@' + config.Mailgun.domain;
-    hourlyListName = 'mtnhourlyevents@' + config.Mailgun.domain;
+        dailyListName = 'mtndailyevents@' + config.Mailgun.domain;
+        hourlyListName = 'mtnhourlyevents@' + config.Mailgun.domain;
 
-    dailyList = mailgun.lists(dailyListName);
-    hourlyList = mailgun.lists(hourlyListName);
+        dailyList = mailgun.lists(dailyListName);
+        hourlyList = mailgun.lists(hourlyListName);
 
-    util.log('Admin Email: ', config.Runtime.adminEmail);
+        util.log('Admin Email: ', config.Runtime.adminEmail);
+
+        isEnabled = true;
+    }
+    else
+    {
+        util.log('Email sending disabled');
+    }
 };
 
 exports.subscribeDaily = function (email, name, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     var subInfo =
     {
         subscribed: true,
@@ -42,6 +55,8 @@ exports.subscribeDaily = function (email, name, cb)
 
 exports.subscribeHourly = function (email, name, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     var subInfo =
     {
         subscribed: true,
@@ -61,6 +76,8 @@ exports.subscribeHourly = function (email, name, cb)
 
 exports.unsubscribe = function (email, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     hourlyList.members(email).delete(function (errHourly, data)
     {
         dailyList.members(email).delete(function (errDaily, data)
@@ -72,6 +89,8 @@ exports.unsubscribe = function (email, cb)
 
 exports.sendDaily = function (html, text, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',
@@ -95,6 +114,8 @@ exports.sendDaily = function (html, text, cb)
 
 exports.sendHourly = function (html, text, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',
@@ -118,6 +139,8 @@ exports.sendHourly = function (html, text, cb)
 
 exports.sendFailureNotification = function (html, cb)
 {
+    if (!isEnabled) { return cb(false); }
+
     var data =
     {
         from: 'Grant Watters <grant@mail.gwatters.com>',

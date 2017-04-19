@@ -111,6 +111,15 @@ function startEventsSync()
 	{
 		mtns.runEventsSync();
 	}
+    else
+    {
+        var syncEventIndex = args.indexOf('--syncEvent');
+
+        if (syncEventIndex >= 0)
+        {
+            mtns.syncSingleEvent(args[syncEventIndex + 1]);
+        }
+    }
 }
 
 function createRoutes()
