@@ -29,22 +29,22 @@ function generateEventHTML(ev)
 {
 	var title = ev.title.split('-')[1].trim();
 
-	return formatDateString(new Date(ev.startdate)) + ': <a href="' + ev.href + '" target="_blank">' + title + '</a>';
+	return formatDateString(new Date(ev.startdate)) + ': <a href="' + ev.href + '" target="_blank">' + title + '</a><br />';
 }
 
 function generateEventText(ev)
 {
-	return JSON.stringify(ev, null, 4);
+	return JSON.stringify(ev, null, 4) + '\r\n\r\n';
 }
 
 function createSummaryBody(data)
 {
 	if (data.newEvents.length > 0)
 	{
-		var bodyHTML = 'Hourly Summary: <br />';
-		var bodyText = 'Hourly Summary: \n';
+		var bodyHTML = 'Hourly Summary:<br />';
+		var bodyText = 'Hourly Summary:\r\n';
 
-		for (var i = 0; i < data.newEvents; ++i)
+		for (var i = 0; i < data.newEvents.length; ++i)
 		{
 			bodyHTML += generateEventHTML(data.newEvents[i]);
 			bodyText += generateEventText(data.newEvents[i]);
