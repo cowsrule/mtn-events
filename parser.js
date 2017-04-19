@@ -188,7 +188,7 @@ exports.parseAvail = function (nodes)
 {
 	var str = nodes ? visitNode({ type: 'Element', children: nodes }) : '';
 
-	var regex = /(\d+|FULL)(?:(?:,\s+(\d)+\s+on\s+waitlist\s+)|\s+)\((\d+).*\)/g;
+	var regex = /(\d+|FULL)(?:(?:,\s+(\d+)\s+on\s+waitlist\s+)|\s+)\((\d+).*\)/g;
 
 	var res = regex.exec(str);
 
