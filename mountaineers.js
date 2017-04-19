@@ -27,12 +27,12 @@ function formatDateString(date)
 
 function generateEventHTML(ev)
 {
-	// Basic1
-	var title = ev.basicInfo.title.split('-')[1].trim();
-	var href = ev.basicInfo.href
+	// Basic
+	var title = ev.title.split('-')[1].trim();
+	var href = ev.href
 
 	// Extended
-	var startDate = formatDateString(new Date(ev.extendedInfo.startDate));
+	var startDate = formatDateString(new Date(ev.startDate));
 
 	return startDate + ': <a href="' + href + '" target="_blank">' + title + '</a><br />';
 }
@@ -48,8 +48,8 @@ function createSummaryBody(data)
 	{
 		try
 		{
-			var bodyHTML = 'Hourly Summary:<br />';
-			var bodyText = 'Hourly Summary:\r\n';
+			var bodyHTML = '';
+			var bodyText = '';
 
 			for (var i = 0; i < data.newEvents.length; ++i)
 			{
@@ -89,6 +89,65 @@ function notifySyncCompleted(syncData)
 	{
 		util.log('No new events - skipped hourly summary email');
 	}
+}
+
+exports.sendDailySummary = function ()
+{
+	var dbEvents = [ ];
+
+	db.getAllEvents(
+		function (dbEvent)
+		{
+			var dayMS = 24 * 60 * 60 * 1000;
+
+			var lastSummaryDate = new Date(Date.now() - dayMS);
+			var foundDate = new Date(dbEvent.founddate);
+
+			if (foundDate.getTime() > lastSummaryDate.getTime())
+			{
+				dbEvents.push(createEventSummaryFromDB(dbEvent));
+			}
+		},
+		function (result)
+		{
+			util.log('New Daily Events: ', dbEvents.length);
+
+			var body = createSummaryBody({ newEvents: dbEvents, updatedEvents: [ ] });
+
+			if (body)
+			{
+				email.sendDaily(body.html, body.text, function (success)
+				{
+					if (!success)
+					{
+						email.sendFailureNotification('Daily Summary Failed to Send!', function () { });
+					}
+				});
+			}
+		},
+		function (err)
+		{
+			util.log('Event Query Error: ', err);
+		}
+	);
+};
+
+function createEventSummaryFromDB(dbEvent)
+{
+	return {
+		title: dbEvent.title,
+		href: dbEvent.href,
+		startDate: dbEvent.startdate
+	};
+}
+
+function createEventSummaryFromParsed(basic, extended)
+{
+	return {
+		title: basic.title,
+		href: basic.href,
+		startDate: extended.startDate
+	};
 }
 
 exports.runEventsSync = function ()
@@ -588,7 +647,7 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 			{
 				if (isNewEvent(basicInfo))
 				{
-					changeSummary.newEvents.push({ basic: basicInfo, extended: extendedInfo });
+					changeSummary.newEvents.push(createEventSummaryFromParsed(basicInfo, extendedInfo));
 
 					db.insertEvent(basicInfo, extendedInfo, function (insertResult)
 					{

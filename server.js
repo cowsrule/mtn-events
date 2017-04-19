@@ -107,6 +107,13 @@ function startEventsSync()
   		mtns.runEventsSync();
 	});
 
+    var dailyJob = schedule.scheduleJob('0 5 * * *', function ()
+    {
+        util.log('Sending daily summary email...');
+
+        mtns.sendDailySummary();
+    });
+
 	if (args.indexOf('--forceSync') >= 0)
 	{
 		mtns.runEventsSync();
@@ -119,6 +126,11 @@ function startEventsSync()
         {
             mtns.syncSingleEvent(args[syncEventIndex + 1]);
         }
+    }
+
+    if (args.indexOf('--sendDaily') >= 0)
+    {
+        mtns.sendDailySummary();
     }
 }
 
