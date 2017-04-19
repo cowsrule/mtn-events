@@ -294,7 +294,6 @@ requirejs([ 'util' ], function (util)
 		var lastUpdateEle = document.getElementById('lastUpdate');
 
 		var lastUpdate = new Date(0);
-		var deltaMS = lastUpdate.getTimezoneOffset() * 60 * 1000;
 
 		for (var i = 0; i < currentEvents.length; ++i)
 		{
@@ -306,7 +305,7 @@ requirejs([ 'util' ], function (util)
 			}
 		}
 
-		var outDate = new Date(lastUpdate.getTime() - deltaMS);
+		var outDate = new Date(lastUpdate.getTime());
 
 		lastUpdateEle.innerText = formatDateString(outDate) + ' ' + formatTimeString(outDate);
 	}
