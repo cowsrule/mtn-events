@@ -107,7 +107,7 @@ function startEventsSync()
   		mtns.runEventsSync();
 	});
 
-    var dailyJob = schedule.scheduleJob('0 5 * * *', function ()
+    var dailyJob = schedule.scheduleJob('0 12 * * *', function ()
     {
         util.log('Sending daily summary email...');
 
