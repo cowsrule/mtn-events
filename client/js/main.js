@@ -1,6 +1,6 @@
 if (typeof DEBUG === 'undefined') { DEBUG = true; }
 
-requirejs([ 'util' ], function (util)
+requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 {
 	var lastUpdate;
 	var currentEvents;
@@ -149,6 +149,15 @@ requirejs([ 'util' ], function (util)
 		{
 			isOpen = true;
 		}
+		else
+		{
+			var regDate = new Date(entry.regdate);
+
+			if (regDate.getTime() < Date.now())
+			{
+				isOpen = true;
+			}
+		}
 
 		return isOpen;
 	}
@@ -195,6 +204,27 @@ requirejs([ 'util' ], function (util)
 		return date.toTimeString().substr(0, 5);
 	}
 
+	function computeRegStr(entry)
+	{
+		var regStr;
+
+		var regDate = new Date(entry.regdate);
+
+		if (isRegistrationOpen(entry))
+		{
+			regStr = '-';
+		}
+		else
+		{
+			var displayText = (formatDateString(regDate) + ' ' + formatTimeString(regDate));
+
+			regStr = '<a href="' + cal.generateGCalLink(entry) + '" target="_blank">' + displayText + '</a>';
+			// regStr = '<a href="#" onclick="handleRegClick(\'' + entry.id + '\')">' + displayText + '</a>';
+		}
+
+		return regStr;
+	}
+
 	function constructTable(data)
 	{
 		var table = document.getElementById('displayTable');
@@ -214,7 +244,7 @@ requirejs([ 'util' ], function (util)
 
 				var startDate = new Date(entry.startdate);
 				var endDate = new Date(entry.enddate);
-				var regDate = new Date(entry.regdate);
+
 				var title = entry.title.split('-')[1].trim();
 
 				var slots = entry.availslots < 0 ? Math.abs(entry.availslots) : '-';
@@ -225,7 +255,7 @@ requirejs([ 'util' ], function (util)
 
 				var endStr = (startDate.getTime() === endDate.getTime()) ? '-' : formatUTCDateString(endDate);
 
-				var regStr = isRegistrationOpen(entry) ? '-' : (formatDateString(regDate) + ' ' + formatTimeString(regDate));
+				var regStr = computeRegStr(entry);
 
 				var newSymbol = computeNewSymbol(entry);
 
@@ -481,6 +511,15 @@ requirejs([ 'util' ], function (util)
 		var event = getEvent(id);
 
 		alert(JSON.stringify(event, null, 4));
+	};
+
+	window.handleRegClick = function (id)
+	{
+		var event = getEvent(id);
+
+		var blob = cal.generateICS(event);
+
+		saveAs(blob, event.title + '.ics', true);
 	};
 
 	window.handleSubButton = function (id)

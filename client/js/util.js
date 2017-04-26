@@ -198,6 +198,11 @@ self.XHR = function (params)
     sendXHR();
 };
 
+self.generateUUID = function ()
+{
+    return 0;
+};
+
 return self;
 
 });
