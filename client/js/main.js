@@ -259,6 +259,13 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 
 				var newSymbol = computeNewSymbol(entry);
 
+				if (!isRegistrationOpen(entry))
+				{
+					var sortDate = new Date(entry.regdate);
+
+					entry.opensort = sortDate.getTime();
+				}
+
 				addField(row, newSymbol);
 				addField(row, formatUTCDateString(startDate));
 				addField(row, endStr);
@@ -410,6 +417,11 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		return true;
 	}
 
+	function filterNotOpen(e)
+	{
+		return !isRegistrationOpen(e);
+	}
+
 	function filterNew(e)
 	{
 		var foundDate = new Date(e.founddate);
@@ -464,6 +476,11 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 				currentFilterFn = filterAll;
 				currentSortField = 'founddate';
 				currentSortDir = 'desc';
+				break;
+			case 'opens':
+				currentFilterFn = filterNotOpen;
+				currentSortField = 'opensort';
+				currentSortDir = 'asc';
 				break;
 			case 'avail':
 				currentFilterFn = filterAvail;
