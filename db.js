@@ -31,6 +31,7 @@ exports.init = function (cb)
 		'href text,' +
 		'type text,' +
 		'title text,' +
+		'branch text,' +
 		'description text,' +
 		'lat text,' +
 		'long text,' +
@@ -81,6 +82,7 @@ exports.insertEvent = function (basicInfo, extendedInfo, cb)
 		'href',
 		'type',
 		'title',
+		'branch',
 		'description',
 		'lat',
 		'long',
@@ -107,6 +109,7 @@ exports.insertEvent = function (basicInfo, extendedInfo, cb)
 		basicInfo.href,
 		extendedInfo.type,
 		basicInfo.title,
+		extendedInfo.branch,
 		basicInfo.description,
 		basicInfo.lat,
 		basicInfo.long,
@@ -127,7 +130,7 @@ exports.insertEvent = function (basicInfo, extendedInfo, cb)
 		extendedInfo.leaderSlots.avail
 	];
 
-	var text = 'INSERT INTO events (' + fields.join(',') + ') values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)';
+	var text = 'INSERT INTO events (' + fields.join(',') + ') values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)';
 
 	return exports.query(text, values, cb)
 };
@@ -139,6 +142,7 @@ exports.updateEvent = function (basicInfo, extendedInfo, cb)
 		'href',
 		'type',
 		'title',
+		'branch',
 		'description',
 		'lat',
 		'long',
@@ -163,6 +167,7 @@ exports.updateEvent = function (basicInfo, extendedInfo, cb)
 		basicInfo.href,
 		extendedInfo.type,
 		basicInfo.title,
+		extendedInfo.branch,
 		basicInfo.description,
 		basicInfo.lat,
 		basicInfo.long,

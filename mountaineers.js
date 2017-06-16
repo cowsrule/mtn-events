@@ -222,6 +222,10 @@ exports.syncSingleEvent = function (id)
 
 			util.log('Parsed: ', extendedInfo);
 		}
+		else if (eventStatusCode === 301)
+		{
+			util.log('Redirected: ', fullResult.headers.location);
+		}
 		else
 		{
 			util.log('Error fetching extended info: ', eventStatusCode, eventDataString);
@@ -321,6 +325,7 @@ function parseExtendedInfo(html)
 		var dateStr = info.children[0].children[0].content;
 		var type;
 		var category;
+		var branch;
 
 		for (var i = 1; i < info.children.length; ++i)
 		{
@@ -338,7 +343,14 @@ function parseExtendedInfo(html)
 			}
 			else if (fieldName === 'Committee:')
 			{
-
+				try
+				{
+					branch = field.children[1].children[0].content;
+				}
+				catch (err)
+				{
+					branch = field.children[1].content;
+				}
 			}
 			else if (fieldName === 'Audience:')
 			{
@@ -380,7 +392,7 @@ function parseExtendedInfo(html)
 			}
 			else if (fieldName === 'Mileage:')
 			{
-				miles = field.children[1].children[0].content
+				miles = field.children[1].children[0].content;
 			}
 			else if (fieldName === 'Difficulty:')
 			{
@@ -455,6 +467,7 @@ function parseExtendedInfo(html)
 
 		info =
 		{
+			branch: branch,
 			startDate: dateInfo.start,
 			endDate: dateInfo.end,
 			regDate: regInfo.open,
@@ -553,7 +566,7 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 		{
 			var areEqual = false;
 
-			if (oldValue === undefined || oldValue === null && newValue === undefined || newValue === null)
+			if ((oldValue === undefined || oldValue === null) && (newValue === undefined || newValue === null))
 			{
 				areEqual = true;
 			}
@@ -596,6 +609,7 @@ function mergeIntoDB(inEvents, dbEvents, cb)
 						if (!compareValues(value.avail, dbEvent[dbField])) { markChanged(field, dbEvent[dbField], value.avail); }
 						break;
 					case 'type':
+					case 'branch':
 					case 'regDate':
 					case 'closeDate':
 					case 'category':

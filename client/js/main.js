@@ -7,6 +7,10 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 
 	var doFilterSlots = false;
 	var doFilterRegister = false;
+	var doFilterClosed = true;
+	var doFilterOutdated = true;
+
+	var doFilterBranch = undefined;
 
 	var currentSortField = 'startdate';
 	var currentSortDir = 'asc';
@@ -56,6 +60,14 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		return events.filter(fn);
 	}
 
+	function not(fn)
+	{
+		return function ()
+		{
+			return !fn.apply(undefined, arguments);
+		};
+	}
+
 	function filterChecks(data)
 	{
 		var outData = data;
@@ -68,6 +80,21 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		if (doFilterRegister)
 		{
 			outData = filterEvents(outData, isRegistrationOpen);
+		}
+
+		if (doFilterClosed)
+		{
+			outData = filterEvents(outData, not(isRegistrationClosed));
+		}
+
+		if (doFilterOutdated)
+		{
+			outData = filterEvents(outData, isOutdated);
+		}
+
+		if (doFilterBranch)
+		{
+			outData = filterEvents(outData, belongsToBranch);
 		}
 
 		return outData;
@@ -141,6 +168,41 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		return symbol
 	}
 
+	function belongsToBranch(entry)
+	{
+		var doesBelong = false;
+
+		if (!entry.branch)
+		{
+			console.log('Branch: ', entry.href);
+		}
+
+		if (!entry.branch || entry.branch.indexOf(doFilterBranch) >= 0)
+		{
+			doesBelong = true;
+		}
+
+		return doesBelong;
+	}
+
+	function isOutdated(entry)
+	{
+		var isOutdated = false;
+
+		if (entry.updatedate)
+		{
+			var updateDate = new Date(entry.updatedate);
+
+			if (Date.now() - updateDate.getTime() < 8.64e+7)
+			{
+				isOutdated = true;
+			}
+		}
+
+
+		return isOutdated;
+	}
+
 	function isRegistrationOpen(entry)
 	{
 		var isOpen = false;
@@ -162,6 +224,23 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		return isOpen;
 	}
 
+	function isRegistrationClosed(entry)
+	{
+		var isClosed = false;
+
+		if (entry.closedate)
+		{
+			var closeDate = new Date(entry.closedate);
+
+			if (closeDate.getTime() < Date.now())
+			{
+				isClosed = true;
+			}
+		}
+
+		return isClosed;
+	}
+
 	function hasSlotsAvailable(entry)
 	{
 		return entry.availslots > 0;
@@ -181,6 +260,11 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 			{
 				color = '#FFFFE0';
 			}
+		}
+
+		if (isRegistrationClosed(entry))
+		{
+			color = '#ffb2ae';
 		}
 
 		return color;
@@ -505,6 +589,41 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 		updateTable();
 	};
 
+	window.handleRadio = function (chk)
+	{
+		switch (chk)
+		{
+			case 'All':
+				doFilterBranch = undefined;
+				break;
+			case 'Seattle':
+				doFilterBranch = 'Seattle';
+				break;
+			case 'Tacoma':
+				doFilterBranch = 'Tacoma';
+				break;
+			case 'Everett':
+				doFilterBranch = 'Everett';
+				break;
+			case 'Olympia':
+				doFilterBranch = 'Olympia';
+				break;
+			case 'Kitsap':
+				doFilterBranch = 'Kitsap';
+				break;
+			case 'Foothills':
+				doFilterBranch = 'Foothills';
+				break;
+			default:
+				doFilterBranch = undefined;
+
+				alert('Unknown Branch: ', chk);
+				break;
+		}
+
+		updateTable();
+	};
+
 	window.handleCheck = function (chk, ele)
 	{
 		switch (chk)
@@ -514,6 +633,12 @@ requirejs([ 'util', 'cal', 'FileSaver' ], function (util, cal)
 				break;
 			case 'register':
 				doFilterRegister = ele.checked;
+				break;
+			case 'closed':
+				doFilterClosed = !ele.checked;
+				break;
+			case 'outdated':
+				doFilterOutdated = !ele.checked;
 				break;
 			default:
 				alert('Unknown Checkbox: ', chk);
